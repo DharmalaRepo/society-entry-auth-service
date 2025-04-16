@@ -32,4 +32,16 @@ public class OutsiderTokenController {
         TokenVerificationResponse response = tokenService.verifyToken(tokenKey, tokenValue);
         return ResponseEntity.ok(response);
     }
+
+    /*
+
+
+    {
+  "societyId": "RID303",
+  "residentName": "Ravi Kumar",
+  "visitorName": "Swiggy Delivery",
+  "visitorEmail": "delivery@example.com",
+  "visitorMobile": "9876543210"
+}
+     */
 }

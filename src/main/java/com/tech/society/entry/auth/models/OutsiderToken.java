@@ -32,6 +32,7 @@ public class OutsiderToken {
     private String visitorType; // DELIVERY, GUEST, WORKER
     private String purpose;
 
+    private String visitorEmail;
     private LocalDateTime validUntil;
     private String status; // ACTIVE, USED, EXPIRED
 
@@ -157,5 +158,13 @@ public class OutsiderToken {
 
     public void setIsActive(int isActive) {
         this.isActive = isActive;
+    }
+
+    public String getVisitorEmail() {
+        return visitorEmail;
+    }
+
+    public void setVisitorEmail(String visitorEmail) {
+        this.visitorEmail = visitorEmail;
     }
 }

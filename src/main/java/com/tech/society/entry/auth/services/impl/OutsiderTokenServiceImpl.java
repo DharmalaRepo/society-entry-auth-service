@@ -4,6 +4,7 @@ import com.tech.society.entry.auth.dto.OutsiderTokenRequest;
 import com.tech.society.entry.auth.dto.TokenVerificationResponse;
 import com.tech.society.entry.auth.models.OutsiderToken;
 import com.tech.society.entry.auth.repositories.OutsiderTokenRepository;
+import com.tech.society.entry.auth.services.MailService;
 import com.tech.society.entry.auth.services.OutsiderTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,6 +19,12 @@ public class OutsiderTokenServiceImpl implements OutsiderTokenService {
 
     @Autowired
     private OutsiderTokenRepository tokenRepo;
+
+    @Autowired
+    private MailService mailService;
+
+    private String visitorEmail = "shivaprasadreddy.dharmala@gmail.com";
+    private String residentName = "Shiva Dharmala";
 
     // Helper method to generate random 4-character alphabetic key
     private String generateTokenKey() {
@@ -63,7 +70,8 @@ public class OutsiderTokenServiceImpl implements OutsiderTokenService {
         token.setIsActive(1);
 
         // Send SMS or notification logic can go here
-
+        // Send email
+        mailService.sendTokenHtmlMail(visitorEmail, tokenKey, tokenValue, residentName);
         return tokenRepo.save(token);
     }
 
@@ -93,4 +101,7 @@ public class OutsiderTokenServiceImpl implements OutsiderTokenService {
                     tokenRepo.save(t);
                 });
     }
+
+
+
 }
