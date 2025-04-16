@@ -1,0 +1,83 @@
+spring:
+  application:
+    name: society-entry-auth-service
+
+  config:
+    import: optional:configserver:http://config-service:8888  # ✅ Use K8s DNS
+
+  cloud:
+    config:
+      enabled: true         # disables local config unless imported via `import`
+      name: resident-service # matches resident-service.yml in config repo
+      profile: dev
+      fail-fast: true
+
+  data:
+    mongodb:
+      uri: mongodb+srv://user:userPassword@dharmala.igq1a.mongodb.net/test?retryWrites=true&w=majority&appName=Dharmala
+      database: Society_Entry_Auth
+      authentication-database: admin
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: shivaprasadreddy.dharmala@gmail.com
+    password: Vaniprasad@1608
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+        debug: true
+
+  security:
+    user:
+      name: admin
+      password: admin123
+
+server:
+  port: 9090
+  shutdown: graceful
+
+logging:
+  level:
+    root: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+    info:
+      enabled: true
+    beans:
+      enabled: true
+    autoconfig:
+      enabled: true
+    configprops:
+      enabled: true
+    env:
+      enabled: true
+    mappings:
+      enabled: true
+    metrics:
+      enabled: true
+    shutdown:
+      enabled: true
+    loggers:
+      enabled: true
+    liquibase:
+      enabled: true
+
+  metrics:
+    export:
+      prometheus:
+        enabled: true
