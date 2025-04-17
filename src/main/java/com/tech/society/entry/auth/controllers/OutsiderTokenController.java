@@ -17,6 +17,11 @@ public class OutsiderTokenController {
     @Autowired
     private OutsiderTokenService tokenService;
 
+    @GetMapping("/health")
+    public ResponseEntity<?> health() {
+        return ResponseEntity.ok("Hello, welcome to Society Entry authentication Service..!!");
+    }
+
     // Generate token endpoint
     @PostMapping("/generate")
     public ResponseEntity<OutsiderToken> generate(@RequestBody OutsiderTokenRequest request) {
