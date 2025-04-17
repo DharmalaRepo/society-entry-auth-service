@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.tech.society</groupId>
-	<artifactId>entry-auth</artifactId>
+	<artifactId>society-entry-auth-service</artifactId>
 	<version>0.0.1</version>
 	<name>society-entry-auth-service</name>
 	<description>Society Entry Exit authentication</description>
@@ -42,10 +42,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
