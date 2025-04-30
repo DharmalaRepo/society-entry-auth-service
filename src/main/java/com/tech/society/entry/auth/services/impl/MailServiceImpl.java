@@ -4,6 +4,7 @@ import com.tech.society.entry.auth.services.MailService;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -14,6 +15,9 @@ public class MailServiceImpl implements MailService {
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Value("${features.email.enabled:true}")
+    private boolean emailEnabled;
 
     @Override
     public void sendTokenMail(String to, String tokenKey, String tokenValue, String residentName) {
@@ -29,6 +33,20 @@ public class MailServiceImpl implements MailService {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(body);
+
+        mailSender.send(message);
+    }
+
+    @Override
+    public void sendOtpToVisitor(String toEmail, String otp, String visitorName, String flatInfo) {
+        if (!emailEnabled) return;
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(toEmail);
+        message.setSubject("Your OTP for Society Entry");
+        message.setText(String.format(
+                "Hello %s,\n\nYour One-Time Password (OTP) for entry to %s is: %s\n\nThis OTP is valid for the next 30 minutes.\n\nThanks,\nSociety Security System",
+                visitorName, flatInfo, otp));
 
         mailSender.send(message);
     }

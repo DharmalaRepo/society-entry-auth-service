@@ -1,0 +1,13 @@
+features:
+  email:
+    enabled: true
+  sms:
+    enabled: false
+  whatsapp:
+    enabled: false
+
+twilio:
+  accountSid: YOUR_ACCOUNT_SID
+  authToken: YOUR_AUTH_TOKEN
+  fromNumber: YOUR_TWILIO_PHONE
+  whatsappNumber: whatsapp:+14155238886
